@@ -1,18 +1,31 @@
 <?php 
-	$nim = $_GET['nim'];
-	
-	require_once('../Config.php');
+$nim = $_GET['nim'];
+
+require_once('../Config.php');
+
+
+$response = [
+	'text' => "Gagal",
+	'status' => false,];
 	
 	$sql = "SELECT * FROM users WHERE nim=$nim";
 	$r = mysqli_query($con,$sql);
 	$row = mysqli_fetch_array($r);
-	$arr = array(
+
+
+	if(mysqli_query($con,$sql)){
+		$arr['text']  = 'berhasil';
+		$arr['status'] = true;
+		$arr['data'] = array(
 			"idUsers"=>$row['idUsers'],
 			"nim"=>$row['nim'],
 			"namaUser"=>$row['namaUser'],
 			"nohp"=>$row['nohp'],
-			"password"=>$row['password']
+			"password"=>$row['password'],
+			"image"=>$row['image'],
+
 		);
+	}
 
 /*	nama_user ! namaUser
 
@@ -75,6 +88,6 @@ SELECT bookings.* FROM bookings JOIN users ON users.id_user = bookings.id_user W
 */
 
 
-	echo json_encode($arr);
-	
-	mysqli_close($con);
+echo json_encode($arr);
+
+mysqli_close($con);

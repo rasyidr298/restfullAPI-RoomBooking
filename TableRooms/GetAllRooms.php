@@ -21,6 +21,7 @@
 		$temp['fasilitas3']=$device['fasilitas3'];
 		$temp['fasilitas4']=$device['fasilitas4'];
 		$temp['deskripsi']=$device['deskripsi'];
+		$temp['image']=$device['image'];
 		array_push($response['room'],$temp);
 	}
 
